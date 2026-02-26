@@ -195,7 +195,14 @@ opentelemetry-collector-agent:
     limits:
       cpu: '500m'
       memory: 512Mi
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9090"
   ports:
+    otlp:
+      enabled: false
+    otlp-http:
+      enabled: false
     prometheus:
       enabled: true
       containerPort: 9090
