@@ -64,15 +64,8 @@ prometheus:
             - "otel-collector-opentelemetry-collector-x-monitoring--b8f7839a3b:9090"
     - job_name: 'otel-collector-agents'
       scrape_interval: 15s
-      kubernetes_sd_configs:
-        - role: pod
-          namespaces:
-            names:
-              - monitoring
-      relabel_configs:
-        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
-          action: keep
-          regex: "true"
-        - source_labels: [__meta_kubernetes_pod_label_app_kubernetes_io_component]
-          action: keep
-          regex: agent-collector
+      dns_sd_configs:
+        - names:
+            - "otel-collector-opentelemetry-collector-agent-headless.monitoring.svc.cluster.local"
+          type: A
+          port: 9090
