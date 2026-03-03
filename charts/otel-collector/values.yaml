@@ -249,8 +249,7 @@ opentelemetry-collector-agent:
       kubeletstats:
         collection_interval: 20s
         auth_type: serviceAccount
-        endpoint: "https://kubernetes.default.svc:443"
-        node: ${K8S_NODE_NAME}
+        endpoint: "https://${K8S_NODE_IP}:10250"
         insecure_skip_verify: true
         metric_groups:
           - node
